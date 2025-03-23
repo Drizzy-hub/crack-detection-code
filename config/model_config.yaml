@@ -1,0 +1,37 @@
+model:
+  type: 'unet' # Options: "unet", "deeplab"
+  in_channels: 3
+  out_channels: 1
+  backbone: 'resnet34' # Used for DeepLab
+  pretrained: true
+
+# Training parameters
+training:
+  batch_size: 8
+  num_epochs: 100
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  optimizer: 'adam' # Options: "adam", "sgd"
+  scheduler: 'plateau' # Options: "plateau", "step", "cosine"
+  early_stopping: 10
+  augmentation: true
+
+# Data parameters
+data:
+  image_size: [512, 512]
+  train_val_split: 0.8
+  use_test_set: true
+  num_workers: 4
+
+# System parameters
+system:
+  device: 'cuda' # Options: "cuda", "cpu"
+  seed: 42
+  save_dir: 'saved_models'
+  save_freq: 5
+
+# Inference parameters
+inference:
+  confidence_threshold: 0.5
+  min_crack_area: 100
+  pixel_mm_ratio: 1.0 # Pixels to millimeters ratio
